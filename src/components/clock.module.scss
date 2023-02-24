@@ -8,6 +8,12 @@
     border-radius: 0.5rem;
     width: 250px;
     margin-bottom: 3rem;
+    opacity: 0;
+
+    &.show {
+        transition: opacity 1s ease-in;
+        opacity: 1;
+    }
 }
 
 .title {
@@ -15,8 +21,31 @@
     margin-bottom: 1rem;
 }
 
-.faces {
+.link {
+    display: block;
+    cursor: pointer;
     
+    &:hover {
+        color: palette.$lgrey;
+    }
+}
+
+.desc {
+    height: 186px;
+    overflow-y: scroll;
+}
+
+.digital {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    margin-bottom: 1rem;
+    
+    span {
+        background-color: white;
+        border-radius: 0.3rem;
+        padding: 0.3rem 2rem;
+    }
 }
 
 .traditional {
@@ -27,8 +56,9 @@
         height: 90%;
         background-color: palette.$lgrey;
         z-index: 0;
+        transform-origin: 2px 50%;
         transform: rotate($rotation);
-        left: 49%;
+        left: 90px;
         top: 5%;
     }
     .line1 {
@@ -79,6 +109,45 @@
         border-radius: 50%;
         z-index: 1;
         background-color: palette.$white;
+    }
+
+    .hand {
+        position: absolute;
+        width: 4px;
+        left: 91px;
+        z-index: 5;
+        transform-origin: 2px 100%;
+        border-radius: 4px;
+
+        &.green {
+            background-color: palette.$green;
+        }
+        &.blue {
+            background-color: palette.$blue;
+        }
+        &.lavender {
+            background-color: palette.$lavender;
+        }
+    }
+
+    .minute {
+        height: 40%;
+        top: 10%;
+    }
+
+    .hour {
+        height: 20%;
+        top: 30%;
+    }
+
+    .topcover {
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        border-radius: 2px;
+        top: 91px;
+        left: 91px;
+        z-index: 10;
     }
 
     .face {

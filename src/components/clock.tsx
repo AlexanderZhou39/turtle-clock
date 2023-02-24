@@ -1,54 +1,136 @@
+import { createSignal, onCleanup, onMount, Show } from 'solid-js';
 import s from './clock.module.scss';
-
-type Accent = 'g' | 'l' | 'b';
 
 type P = {
     progress: number,
-    accent: Accent,
+    accent: string,
+    delay: number,
     title: string
-    desc: string
-} | {
-    progress: number,
-    accent: Accent,
-    title: string
-    link: string
+    desc: string,
+    link?: string
 };
 
-const accentBg = (accent: Accent) => {
-    switch (accent) {
-        case 'b':
-            return s.blue;
-        case 'g':
-            return s.green;
-        case 'l':
-            return s.lavender;
+const formatTime = (hour: number, minute: number): string => {
+    let adjustedHour = hour % 24; 
+    let meridiem = 'am';
+    if (adjustedHour >= 12) {
+        meridiem = 'pm';
     }
+    if (Math.floor(adjustedHour) > 12) {
+        adjustedHour = adjustedHour - 12;
+    }
+    let hourStr = String(Math.floor(adjustedHour));
+    let minStr = String(Math.floor(minute % 60));
+    if (adjustedHour < 10) {
+        hourStr = '0' + hourStr;
+    }
+    if (minute < 10) {
+        minStr = '0' + minStr;
+    }
+    return `${hourStr}:${minStr} ${meridiem}`;
 };
 
 function Clock(props: P) {
+    const [showDesc, setShowDesc] = createSignal(false);
+    const [reveal, setReveal] = createSignal(false);
 
+    let timeout;
+
+    onMount(() => {
+        timeout = setTimeout(() => setReveal(true), props.delay);
+    });
+
+    onCleanup(() => clearTimeout(timeout));
+
+    const hourDeg = () => props.progress * 720;
+    const minuteDeg = () => ((props.progress * 24) % 1) * 360;
+
+    const hour = () => props.progress * 24;
+    const minute = () => (hour() % 1) * 60;
 
     return (
-        <div class={'text-xl ' + s.clock}>
-            <h1 class={s.title}>
-                {props.title}
+        <div 
+            class={s.clock + ' border-4 border-solid ' + (reveal() ? s.show : '')}
+            style={{
+                "border-color": props.accent
+            }}
+        >
+            <h1 class={'text-xl ' + s.title}>
+                <span 
+                    class={s.link}
+                    onClick={() => {
+                        setShowDesc(prev => !prev);
+                    }}
+                >
+                    {props.title}
+                </span>
             </h1>
-            <div class={s.faces}>
-                <div class={s.traditional}>
-                    <div class={s.face}>
-                        <div class={s.line1 + ' ' + accentBg(props.accent)} />
-                        <div class={s.line2} />
-                        <div class={s.line3} />
-                        <div class={s.line4 + ' ' + accentBg(props.accent)} />
-                        <div class={s.line5} />
-                        <div class={s.line6} />
-                        <div class={s.linecover} />
+            <Show when={!showDesc()} fallback={
+                <div class={s.desc}>
+                    <p class='text-sm mb-3'>
+                        {props.desc}
+                    </p>
+                    <Show when={props.link}>
+                        <a 
+                            class='text-blue-300 hover:text-blue-400 hover:cursor-pointer'
+                            href={props.link} target="_blank" rel="noopener noreferrer"
+                        >
+                            view source
+                        </a>
+                    </Show>
+                </div>
+            }>
+                <div 
+                    class={s.digital + ' text-base font-bold'}
+                    style={{
+                        color: props.accent
+                    }}
+                >
+                    <span>{formatTime(hour(), minute())}</span>
+                </div>
+                <div class={s.faces}>
+                    <div class={s.traditional}>
+                        <div class={s.face}>
+                            <div 
+                                class={s.line1} 
+                                style={{ "background-color": props.accent }}
+                            />
+                            <div class={s.line2} />
+                            <div class={s.line3} />
+                            <div 
+                                class={s.line4} 
+                                style={{ "background-color": props.accent }}
+                            />
+                            <div class={s.line5} />
+                            <div class={s.line6} />
+                            <div class={s.linecover} />
+                            <div 
+                                class={s.hand + ' ' + s.hour} 
+                                style={{
+                                    rotate: `${hourDeg()}deg`,
+                                    "background-color": props.accent
+                                }}
+                            />
+                            <div 
+                                class={s.hand + ' ' + s.minute} 
+                                style={{
+                                    rotate: `${minuteDeg()}deg`,
+                                    "background-color": props.accent
+                                }}
+                            />
+                            <div 
+                                class={s.topcover} 
+                                style={{
+                                    "background-color": props.accent
+                                }}
+                            />
+                        </div>
+                    </div>
+                    <div class={s.hourglass}>
+
                     </div>
                 </div>
-                <div class={s.hourglass}>
-
-                </div>
-            </div>
+            </Show>
         </div>
     );
 }
