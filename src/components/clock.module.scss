@@ -1,0 +1,92 @@
+@use './palette';
+
+.clock {
+    background-color: palette.$mgrey;
+    padding: 1rem 32px;
+    padding-bottom: 32px;
+    color: white;
+    border-radius: 0.5rem;
+    width: 250px;
+    margin-bottom: 3rem;
+}
+
+.title {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.faces {
+    
+}
+
+.traditional {
+
+    @mixin line($rotation: 0deg) {
+        position: absolute;
+        width: 5px;
+        height: 90%;
+        background-color: palette.$lgrey;
+        z-index: 0;
+        transform: rotate($rotation);
+        left: 49%;
+        top: 5%;
+    }
+    .line1 {
+        @include line(0deg);
+
+        &.green {
+            background-color: palette.$green;
+        }
+        &.blue {
+            background-color: palette.$blue;
+        }
+        &.lavender {
+            background-color: palette.$lavender;
+        }
+    }
+    .line2 {
+        @include line(30deg);
+    }
+    .line3 {
+        @include line(60deg);
+    }
+    .line4 {
+        @include line(90deg);
+
+        &.green {
+            background-color: palette.$green;
+        }
+        &.blue {
+            background-color: palette.$blue;
+        }
+        &.lavender {
+            background-color: palette.$lavender;
+        }
+    }
+    .line5 {
+        @include line(120deg);
+    }
+    .line6 {
+        @include line(150deg);
+    }
+
+    .linecover {
+        position: absolute;
+        width: 75%;
+        height: 75%;
+        top: 12.5%;
+        left: 12.5%;
+        border-radius: 50%;
+        z-index: 1;
+        background-color: palette.$white;
+    }
+
+    .face {
+        background-color: palette.$white;
+        width: 186px;
+        height: 186px;
+        border-radius: 50%;
+        position: relative;
+        overflow: hidden;
+    }
+}

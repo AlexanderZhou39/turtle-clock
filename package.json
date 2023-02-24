@@ -1,0 +1,24 @@
+{
+  "name": "turtle-clock",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/AlexanderZhou39/turtle-clock.git",
+  "author": "Alexander Zhou <alexzhou3999@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@astrojs/solid-js": "^2.0.2",
+    "@astrojs/tailwind": "^3.0.1",
+    "astro": "^2.0.4",
+    "solid-js": "^1.4.3",
+    "tailwindcss": "^3.0.24"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "devDependencies": {
+    "sass": "^1.58.3"
+  }
+}

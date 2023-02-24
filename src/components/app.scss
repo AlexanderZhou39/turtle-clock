@@ -1,0 +1,5 @@
+@use './palette';
+
+body, html {
+    background-color: palette.$grey;
+}
