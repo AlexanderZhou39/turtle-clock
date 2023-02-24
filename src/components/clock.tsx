@@ -33,6 +33,7 @@ const formatTime = (hour: number, minute: number): string => {
 function Clock(props: P) {
     const [showDesc, setShowDesc] = createSignal(false);
     const [reveal, setReveal] = createSignal(false);
+    const [hover, setHover] = createSignal(false);
 
     let timeout;
 
@@ -50,20 +51,16 @@ function Clock(props: P) {
 
     return (
         <div 
-            class={s.clock + ' border-4 border-solid ' + (reveal() ? s.show : '')}
+            class={s.clock + ' border-4 border-solid hover:cursor-pointer ' + (reveal() ? s.show : '')}
+            onMouseEnter={() => setHover(true)}
+            onMouseLeave={() => setHover(false)}
             style={{
-                "border-color": props.accent
+                "border-color": hover() ? props.accent : '#313737'
             }}
+            onClick={() => setShowDesc(prev => !prev)}
         >
             <h1 class={'text-xl ' + s.title}>
-                <span 
-                    class={s.link}
-                    onClick={() => {
-                        setShowDesc(prev => !prev);
-                    }}
-                >
-                    {props.title}
-                </span>
+                {props.title}
             </h1>
             <Show when={!showDesc()} fallback={
                 <div class={s.desc}>
