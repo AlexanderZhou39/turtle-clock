@@ -14,7 +14,7 @@ type P = {
     link: string
 };
 
-const accentToClass = (accent: Accent) => {
+const accentBg = (accent: Accent) => {
     switch (accent) {
         case 'b':
             return s.blue;
@@ -29,17 +29,17 @@ function Clock(props: P) {
 
 
     return (
-        <div class={s.clock}>
+        <div class={'text-xl ' + s.clock}>
             <h1 class={s.title}>
                 {props.title}
             </h1>
             <div class={s.faces}>
                 <div class={s.traditional}>
                     <div class={s.face}>
-                        <div class={s.line1 + ' ' + accentToClass(props.accent)} />
+                        <div class={s.line1 + ' ' + accentBg(props.accent)} />
                         <div class={s.line2} />
                         <div class={s.line3} />
-                        <div class={s.line4 + ' ' + accentToClass(props.accent)} />
+                        <div class={s.line4 + ' ' + accentBg(props.accent)} />
                         <div class={s.line5} />
                         <div class={s.line6} />
                         <div class={s.linecover} />

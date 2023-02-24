@@ -4,7 +4,7 @@ import './app.scss';
 function App() {
     return (
         <>
-            <h1 class="text-center text-white mt-10">Turtle Clock</h1>
+            <h1 class="text-center text-white text-3xl font-bold mt-10">Turtle Clocks</h1>
 
             <div class="container max-w-5xl mx-auto px-5 mt-10 flex flex-row flex-wrap justify-around">
                 <Clock progress={0.5} title='something' desc='something' accent='b' />
