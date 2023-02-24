@@ -29,8 +29,8 @@ function LocalClock(props: P) {
             progress={progress()}
             accent={props.accent}
             delay={props.delay}
-            title='Your Time'
-            desc='Current time in your timezone'
+            title='Your Clock'
+            desc={['Current time in your timezone']}
         />
     );
 }

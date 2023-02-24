@@ -13,8 +13,8 @@ function TurtleClock(props: P) {
             progress={progress}
             accent={props.accent}
             delay={props.delay}
-            title='Turtle Time'
-            desc='Based on turtle populations from pre-industrial age to today. 12:00am = estimated pre-industrial population. 11:59pm = extinct.'
+            title='Turtle Clock'
+            desc={['Based on turtle populations from pre-industrial age to today.', '12:00am = estimated pre-industrial population.', '11:59pm = extinct.']}
             link='https://emagazine.com/sea-turtle-populations-in-freefall/'
         />
     );

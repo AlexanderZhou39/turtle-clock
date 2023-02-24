@@ -29,8 +29,8 @@ function DecadeClock(props: P) {
             progress={progress}
             accent={props.accent}
             delay={props.delay}
-            title='Decade Time'
-            desc='12:00am = start of decade. 11:59pm = end of decade.'
+            title='Decade Clock'
+            desc={['12:00am = start of decade.', '11:59pm = end of decade.']}
         />
     );
 }

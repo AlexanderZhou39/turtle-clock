@@ -29,8 +29,8 @@ function UTCClock(props: P) {
             progress={progress()}
             accent={props.accent}
             delay={props.delay}
-            title='UTC Time'
-            desc='Current time in UTC timezone'
+            title='UTC Clock'
+            desc={['Current time in UTC timezone']}
             link='https://en.wikipedia.org/wiki/Coordinated_Universal_Time'
         />
     );

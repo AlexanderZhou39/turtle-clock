@@ -34,8 +34,8 @@ function AntarcticaClock(props: P) {
             progress={progress()}
             accent={props.accent}
             delay={props.delay}
-            title='Antarctica Time'
-            desc="Current time in Antarctica's Vostok zone. Identical to UTC+6."
+            title='Antarctica Clock'
+            desc={["Current time in Antarctica's Vostok zone.", "Identical to UTC+6."]}
             link='https://en.wikipedia.org/wiki/Time_in_Antarctica'
         />
     );

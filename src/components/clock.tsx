@@ -1,4 +1,4 @@
-import { createSignal, onCleanup, onMount, Show } from 'solid-js';
+import { createSignal, For, onCleanup, onMount, Show } from 'solid-js';
 import s from './clock.module.scss';
 
 type P = {
@@ -6,7 +6,7 @@ type P = {
     accent: string,
     delay: number,
     title: string
-    desc: string,
+    desc: string[],
     link?: string
 };
 
@@ -64,9 +64,11 @@ function Clock(props: P) {
             </h1>
             <Show when={!showDesc()} fallback={
                 <div class={s.desc}>
-                    <p class='text-sm mb-3'>
-                        {props.desc}
-                    </p>
+                    <For each={props.desc}>{(desc) => (
+                        <p class='text-sm mb-3'>
+                            {desc}
+                        </p>
+                    )}</For>
                     <Show when={props.link}>
                         <a 
                             class='text-blue-300 hover:text-blue-400 hover:cursor-pointer'
@@ -122,9 +124,6 @@ function Clock(props: P) {
                                 }}
                             />
                         </div>
-                    </div>
-                    <div class={s.hourglass}>
-
                     </div>
                 </div>
             </Show>

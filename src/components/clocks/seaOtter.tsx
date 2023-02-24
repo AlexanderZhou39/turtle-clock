@@ -15,8 +15,8 @@ function SeaOtterClock(props: P) {
             progress={progress}
             accent={props.accent}
             delay={props.delay}
-            title='Sea Otter Time'
-            desc='Based on California Sea Otter populations from 2016 to 2020. 12:00am = estimated 2016 population. 11:59pm = extinct.'
+            title='Sea Otter Clock'
+            desc={['Based on California Sea Otter populations from 2016 to 2020.', '12:00am = estimated 2016 population.', '11:59pm = extinct.']}
             link='https://www.mmc.gov/priority-topics/species-of-concern/southern-sea-otter/'
         />
     );

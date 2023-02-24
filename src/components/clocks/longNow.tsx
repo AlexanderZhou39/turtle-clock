@@ -14,7 +14,7 @@ function LongNowClock(props: P) {
             accent={props.accent}
             delay={props.delay}
             title='The Long Now'
-            desc='Based on the 10,000 year clock of The Long Now Foundation. 12:00am = 1AD. 11:59pm = 10,000AD'
+            desc={['Based on the 10,000 year clock of The Long Now Foundation.', '12:00am = 1AD.', '11:59pm = 10,000AD']}
             link='https://longnow.org/clock/'
         />
     );

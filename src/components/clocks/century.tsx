@@ -29,8 +29,8 @@ function CenturyClock(props: P) {
             progress={progress}
             accent={props.accent}
             delay={props.delay}
-            title='Century Time'
-            desc='12:00am = start of century. 11:59pm = end of century.'
+            title='Century Clock'
+            desc={['12:00am = start of century.', '11:59pm = end of century.']}
         />
     );
 }
