@@ -32,6 +32,7 @@ const formatTime = (hour: number, minute: number): string => {
 
 function Clock(props: P) {
     const [showDesc, setShowDesc] = createSignal(false);
+    const [fade, setFade] = createSignal(false);
     const [reveal, setReveal] = createSignal(false);
     const [hover, setHover] = createSignal(false);
 
@@ -57,13 +58,21 @@ function Clock(props: P) {
             style={{
                 "border-color": hover() ? props.accent : '#313737'
             }}
-            onClick={() => setShowDesc(prev => !prev)}
+            onClick={() => {
+                setFade(true);
+                setTimeout(() => {
+                    setShowDesc(prev => !prev);
+                }, 200);
+                setTimeout(() => {
+                    setFade(false);
+                }, 230);
+            }}
         >
             <h1 class={'text-xl ' + s.title}>
                 {props.title}
             </h1>
             <Show when={!showDesc()} fallback={
-                <div class={s.desc}>
+                <div class={s.desc + ' ' + (fade() ? s.fade : '')}>
                     <For each={props.desc}>{(desc) => (
                         <p class='text-sm mb-3'>
                             {desc}
@@ -79,50 +88,52 @@ function Clock(props: P) {
                     </Show>
                 </div>
             }>
-                <div 
-                    class={s.digital + ' text-base font-bold'}
-                    style={{
-                        color: props.accent
-                    }}
-                >
-                    <span>{formatTime(hour(), minute())}</span>
-                </div>
-                <div class={s.faces}>
-                    <div class={s.traditional}>
-                        <div class={s.face}>
-                            <div 
-                                class={s.line1} 
-                                style={{ "background-color": props.accent }}
-                            />
-                            <div class={s.line2} />
-                            <div class={s.line3} />
-                            <div 
-                                class={s.line4} 
-                                style={{ "background-color": props.accent }}
-                            />
-                            <div class={s.line5} />
-                            <div class={s.line6} />
-                            <div class={s.linecover} />
-                            <div 
-                                class={s.hand + ' ' + s.hour} 
-                                style={{
-                                    rotate: `${hourDeg()}deg`,
-                                    "background-color": props.accent
-                                }}
-                            />
-                            <div 
-                                class={s.hand + ' ' + s.minute} 
-                                style={{
-                                    rotate: `${minuteDeg()}deg`,
-                                    "background-color": props.accent
-                                }}
-                            />
-                            <div 
-                                class={s.topcover} 
-                                style={{
-                                    "background-color": props.accent
-                                }}
-                            />
+                <div class={s.display + ' ' + (fade() ? s.fade : '')}>
+                    <div 
+                        class={s.digital + ' text-base font-bold'}
+                        style={{
+                            color: props.accent
+                        }}
+                    >
+                        <span>{formatTime(hour(), minute())}</span>
+                    </div>
+                    <div class={s.faces}>
+                        <div class={s.traditional}>
+                            <div class={s.face}>
+                                <div 
+                                    class={s.line1} 
+                                    style={{ "background-color": props.accent }}
+                                />
+                                <div class={s.line2} />
+                                <div class={s.line3} />
+                                <div 
+                                    class={s.line4} 
+                                    style={{ "background-color": props.accent }}
+                                />
+                                <div class={s.line5} />
+                                <div class={s.line6} />
+                                <div class={s.linecover} />
+                                <div 
+                                    class={s.hand + ' ' + s.hour} 
+                                    style={{
+                                        rotate: `${hourDeg()}deg`,
+                                        "background-color": props.accent
+                                    }}
+                                />
+                                <div 
+                                    class={s.hand + ' ' + s.minute} 
+                                    style={{
+                                        rotate: `${minuteDeg()}deg`,
+                                        "background-color": props.accent
+                                    }}
+                                />
+                                <div 
+                                    class={s.topcover} 
+                                    style={{
+                                        "background-color": props.accent
+                                    }}
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>

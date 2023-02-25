@@ -1,6 +1,21 @@
 @use './palette';
 
+@keyframes fadein {
+    0% {
+        left: -0.75rem;
+        opacity: 0;
+    }
+    60% {
+        left: 0rem;
+    }
+    100% {
+        opacity: 1;
+        left: 0rem;
+    }
+}
+
 .clock {
+    position: relative;
     background-color: palette.$mgrey;
     padding: 1rem 32px;
     padding-bottom: 32px;
@@ -9,10 +24,10 @@
     width: 250px;
     margin-bottom: 3rem;
     opacity: 0;
+    left: -0.75rem;
 
     &.show {
-        transition: opacity 1s ease-in;
-        opacity: 1;
+        animation: fadein 1s ease-out 0s 1 forwards;
     }
 }
 
@@ -33,6 +48,16 @@
 .desc {
     height: 235px;
     overflow-y: scroll;
+}
+
+.display, .desc {
+    opacity: 1;
+    transition: opacity 0.2s ease-in;
+
+    &.fade {
+        opacity: 0;
+        transition: opacity 0.2s ease-in;
+    }
 }
 
 .digital {

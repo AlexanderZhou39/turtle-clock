@@ -109,7 +109,7 @@ function App() {
             <div class="container max-w-5xl mx-auto px-5 my-10 flex flex-row flex-wrap justify-around gap-6">
                 
                 <For each={clocks}>{(clock, i) => (
-                    <Dynamic component={clock} accent={accents[i() % accents.length]} delay={i() * 150} />
+                    <Dynamic component={clock} accent={accents[i() % accents.length]} delay={i() * 200} />
                 )}</For>
             </div>
         </>
